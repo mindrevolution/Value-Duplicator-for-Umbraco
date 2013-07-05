@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ValueDuplicator")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Value Duplicator for Umbraco")]
+[assembly: AssemblyDescription("Copy property/field values on any document type")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ValueDuplicator")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("mindrevolution")]
+[assembly: AssemblyProduct("Value Duplicator for Umbraco")]
+[assembly: AssemblyCopyright("Copyright ©  2013 mindrevolution")]
+[assembly: AssemblyTrademark("mindrevolution is a registered trademark")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
