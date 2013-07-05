@@ -43,9 +43,10 @@
 
 <asp:PlaceHolder ID="CopyProcess" runat="server" Visible="false">
 
-    <div class="propertypane" style="margin-top:20px;">
+    <div class="propertypane" style="margin-top:20px;" id="ValueDuplicatorCopyStartPanel">
         <p>
-            <strong><asp:Button ID="StartCopy" runat="server" Text="Copy" CssClass="bigInput" style="width:auto;padding:0px 10px;" OnClick="StartCopy_Click" /> value to for all documents of this type to the target.</strong>
+            <asp:Button ID="StartCopy" runat="server" Text="Copy" CssClass="bigInput" style="width:auto;padding:0px 10px;" OnClick="StartCopy_Click" OnClientClick="$('#ValueDuplicatorCopySpinner').show();$('#StartCopy').hide();" ClientIDMode="Static" />
+            <img src="/Umbraco/Images/throbber.gif" style="display:none;" id="ValueDuplicatorCopySpinner" />
         </p>
         <div ID="CopiedNodes" runat="server">
         </div>

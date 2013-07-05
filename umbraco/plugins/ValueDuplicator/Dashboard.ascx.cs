@@ -48,6 +48,7 @@ namespace ValueDuplicator
             else
             {
                 FieldsPanel.Visible = false;
+                DifferentDatatypeWarning.Visible = false;
             }
         }
 
@@ -87,6 +88,7 @@ namespace ValueDuplicator
             {
                 TargetPropertyPanel.Visible = false;
                 TargetPropertyInfo.Visible = false;
+                DifferentDatatypeWarning.Visible = false;
             }
         }
 
@@ -109,6 +111,7 @@ namespace ValueDuplicator
 
                     TargetPropertyInfo.Visible = true;
                     CopyProcess.Visible = true;
+                    StartCopy.Visible = true;
                 }
             }
             else
@@ -124,12 +127,39 @@ namespace ValueDuplicator
             DocumentType doctype = new umbraco.cms.businesslogic.web.DocumentType(System.Convert.ToInt32(DoctypesList.SelectedValue));
             umbraco.cms.businesslogic.Content[] docs = Document.getContentOfContentType(doctype);
 
-            Document doc;
-            foreach (umbraco.cms.businesslogic.Content d in docs)
+            // - no fancy async stuff (because of ascx), so we need to stretch the environment a bit ...
+            Page.Server.ScriptTimeout = (15 * 60); //*60=minutes!
+
+            try
             {
-                doc = new Document(d.Id);
-                CopiedNodes.InnerText += doc.Text + "--" + doc.Id.ToString() + "--";
+                Document doc;
+                CopiedNodes.InnerHtml = "<ul>";
+                foreach (umbraco.cms.businesslogic.Content d in docs)
+                {
+                    doc = new Document(d.Id);
+                    if (doc != null)
+                    {
+                        CopiedNodes.InnerHtml += NodeCopyResultString(doc.Id, doc.Text);
+                    }
+                    else
+                    {
+                        CopiedNodes.InnerHtml += "<li>Unable to load document with id " + d.Id.ToString() + "</li>";
+                    }
+                }
+                CopiedNodes.InnerHtml += "</ul>";
             }
+            catch { }
+            
+            // - back to normal (90 seconds)
+            Page.Server.ScriptTimeout = 90;
+
+            // - copy done ...
+            StartCopy.Visible = false;
+        }
+
+        private string NodeCopyResultString(object docid, string name)
+        {
+            return string.Format("<li>Copying field value in document '{0}' (#{1}).</li>",name,docid.ToString());
         }
     }
 }
