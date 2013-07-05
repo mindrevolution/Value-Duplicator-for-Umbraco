@@ -16,9 +16,9 @@ Compatible with Umbraco 4.11+ (including version 6)
 ![Main screen](readme.md.res/ValueDuplicator-Mainscreen.png "Value Duplicator")
 
 ## How to use it?
-Here's a short presentation to get you started:
+Point. Click.
 
-<iframe src="http://www.screenr.com/embed/pRhH" width="1000" height="609" frameborder="0"></iframe>
+[Here's a short screencast](http://www.screenr.com/pRhH) to get you started.
 
 ##Download: Ready to use as an Umbraco Package
 You can download Value Duplicator as a package from the Umbraco Package Repository.
