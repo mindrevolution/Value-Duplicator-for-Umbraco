@@ -121,6 +121,33 @@ namespace ValueDuplicator {
         protected global::System.Web.UI.WebControls.PlaceHolder DifferentDatatypeWarning;
         
         /// <summary>
+        /// ModifyValues control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder ModifyValues;
+        
+        /// <summary>
+        /// EnableModifyValues control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox EnableModifyValues;
+        
+        /// <summary>
+        /// ModifyPattern control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ModifyPattern;
+        
+        /// <summary>
         /// CopyProcess control.
         /// </summary>
         /// <remarks>
@@ -137,6 +164,15 @@ namespace ValueDuplicator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button StartCopy;
+        
+        /// <summary>
+        /// PublishAfterCopy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox PublishAfterCopy;
         
         /// <summary>
         /// CopiedNodes control.

@@ -23,6 +23,7 @@ namespace ValueDuplicator
                 {
                     DoctypesList.Items.Add(new ListItem(doctype.Text + " (" + doctype.Alias + ")", doctype.Id.ToString()));
                 }
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "ValuesDuplicatorModifyTextbox", "$(function() { $('#ModifyPattern').hide();if(this.checked){$('#ModifyPattern').show()}; });", true);
             }
         }
 
@@ -48,6 +49,7 @@ namespace ValueDuplicator
             else
             {
                 FieldsPanel.Visible = false;
+                ModifyValues.Visible = false;
                 DifferentDatatypeWarning.Visible = false;
             }
         }
@@ -82,6 +84,7 @@ namespace ValueDuplicator
                     PropertyInfo.Visible = true;
                     TargetPropertyPanel.Visible = true;
                     TargetPropertyInfo.Visible = false;
+                    DifferentDatatypeWarning.Visible = false;
                 }
             }
             else
@@ -112,11 +115,13 @@ namespace ValueDuplicator
                     TargetPropertyInfo.Visible = true;
                     CopyProcess.Visible = true;
                     StartCopy.Visible = true;
+                    ModifyValues.Visible = true;
                 }
             }
             else
             {
                 TargetPropertyInfo.Visible = false;
+                ModifyValues.Visible = false;
             }
 
         }
@@ -133,12 +138,18 @@ namespace ValueDuplicator
             try
             {
                 Document doc;
+                string propFromAlias = new PropertyType(Convert.ToInt32(PropertiesList.SelectedValue)).Alias;
+                string propToAlias = new PropertyType(Convert.ToInt32(TargetProperty.SelectedValue)).Alias;
+
                 CopiedNodes.InnerHtml = "<ul>";
                 foreach (umbraco.cms.businesslogic.Content d in docs)
                 {
                     doc = new Document(d.Id);
                     if (doc != null)
                     {
+                        // copy value
+                        CopyValues(doc, propFromAlias, propToAlias);
+
                         CopiedNodes.InnerHtml += NodeCopyResultString(doc.Id, doc.Text);
                     }
                     else
@@ -149,17 +160,46 @@ namespace ValueDuplicator
                 CopiedNodes.InnerHtml += "</ul>";
             }
             catch { }
-            
+
             // - back to normal (90 seconds)
             Page.Server.ScriptTimeout = 90;
-
-            // - copy done ...
-            StartCopy.Visible = false;
         }
 
         private string NodeCopyResultString(object docid, string name)
         {
-            return string.Format("<li>Copying field value in document '{0}' (#{1}).</li>",name,docid.ToString());
+            return string.Format("<li>Copying field value in document '{0}' (#{1}).</li>", name, docid.ToString());
         }
+
+        // - copies Umbraco document field values
+        private void CopyValues(Document doc, string fromProperty, string toProperty, bool multiLang, string multiLangCode)
+        {
+            //  copy value
+            string sourceValue = doc.getProperty(fromProperty).Value.ToString();
+            string targetValue = sourceValue;
+
+            // - modify target value?
+            if (EnableModifyValues.Checked)
+            {
+                targetValue = ModifyPattern.Text.Replace("{{VALUE}}", sourceValue);
+            }
+
+            // - set new value 
+            doc.getProperty(toProperty).Value = targetValue;
+            
+            // - save (and publish, if requested to do so)
+            if (PublishAfterCopy.Checked)
+            {
+                doc.Save();
+            }
+            else
+            {
+                doc.SaveAndPublish(umbraco.helper.GetCurrentUmbracoUser());
+            }
+        }
+        private void CopyValues(Document doc, string fromProperty, string toProperty)
+        {
+            CopyValues(doc, fromProperty, toProperty, false, string.Empty);
+        }
+
     }
 }

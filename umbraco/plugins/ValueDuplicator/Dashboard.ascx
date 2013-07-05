@@ -31,22 +31,32 @@
             </asp:PlaceHolder>
         </div>
         <div style="clear:both;"></div>
+
+        <asp:PlaceHolder ID="DifferentDatatypeWarning" runat="server" Visible="false">
+            <p style="color:white;background-color:#f36f21;padding:4px;margin-bottom:0px;">
+                Please make sure that the copied values will be compatible with the target data type.
+            </p>
+        </asp:PlaceHolder>
+
     </div>
 
-    <asp:PlaceHolder ID="DifferentDatatypeWarning" runat="server" Visible="false">
-        <p style="color:red;">
-            Please make sure that the copied values will be compatible with the target data type.
-        </p>
-    </asp:PlaceHolder>
+</asp:PlaceHolder>
 
+<asp:PlaceHolder ID="ModifyValues" runat="server" Visible="false">
+    <div class="propertypane" style="margin-top:20px;">
+        <asp:CheckBox ID="EnableModifyValues" runat="server" Text="Modify values for target property" onclick="$('#ModifyPattern').hide();if(this.checked){$('#ModifyPattern').show()};" />
+        <br />
+        <asp:TextBox ID="ModifyPattern" runat="server" TextMode="MultiLine" Columns="80" Rows="10" ClientIDMode="Static" style="width:560px;display:none;">{{VALUE}}</asp:TextBox>
+    </div>
 </asp:PlaceHolder>
 
 <asp:PlaceHolder ID="CopyProcess" runat="server" Visible="false">
 
     <div class="propertypane" style="margin-top:20px;" id="ValueDuplicatorCopyStartPanel">
         <p>
-            <asp:Button ID="StartCopy" runat="server" Text="Copy" CssClass="bigInput" style="width:auto;padding:0px 10px;" OnClick="StartCopy_Click" OnClientClick="$('#ValueDuplicatorCopySpinner').show();$('#StartCopy').hide();" ClientIDMode="Static" />
+            <asp:Button ID="StartCopy" runat="server" Text="Copy values" CssClass="bigInput" style="width:auto;padding:0px 10px;" OnClick="StartCopy_Click" OnClientClick="$('#ValueDuplicatorCopySpinner').show();$('#StartCopy').hide();" ClientIDMode="Static" />
             <img src="/Umbraco/Images/throbber.gif" style="display:none;" id="ValueDuplicatorCopySpinner" />
+            <asp:CheckBox ID="PublishAfterCopy" runat="server" Text="Publish documents after copying"/>
         </p>
         <div ID="CopiedNodes" runat="server">
         </div>
