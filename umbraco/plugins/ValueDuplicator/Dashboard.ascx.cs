@@ -193,7 +193,13 @@ namespace ValueDuplicator
             }
             else
             {
-                doc.SaveAndPublish(umbraco.helper.GetCurrentUmbracoUser());
+                // - v6+ way:
+                //doc.SaveAndPublish(umbraco.helper.GetCurrentUmbracoUser());
+
+                // - legacy way
+                doc.Save();
+                doc.Publish(umbraco.helper.GetCurrentUmbracoUser());
+                umbraco.library.UpdateDocumentCache(doc.Id);
             }
         }
         private void CopyValues(Document doc, string fromProperty, string toProperty)
