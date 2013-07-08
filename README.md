@@ -10,7 +10,7 @@ You can also easily duplicate fields to let editors work on them (but not output
 
 By providing this functionality as a dashboard control, admins, power-users and frontenders are not dependend on developers if they would like to **refactor website content** for example. 
 
-Compatible with Umbraco 4.11+ (including version 6)
+Compatible with Umbraco 4.9+ (including version 6.1+)
 
 ## How does it look?
 ![Main screen](readme.md.res/ValueDuplicator-Mainscreen.png "Value Duplicator")
@@ -21,7 +21,7 @@ Point. Click.
 [Here's a short screencast](http://www.screenr.com/pRhH) to get you started.
 
 ##Download: Ready to use as an Umbraco Package
-You can download Value Duplicator as a package from the Umbraco Package Repository.
+You can [download](http://our.umbraco.org/projects/backoffice-extensions/value-duplicator "Download the Package") Value Duplicator as a ready to use Umbraco package and plug it into your site easily. The package installer only adds a dashboard item to the "Settings" section, so the risk of wrecking your CMS installation extremely low. 
 
 ##Licence
 Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html), which allows open source as well as commercial use.
